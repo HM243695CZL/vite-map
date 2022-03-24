@@ -4,10 +4,22 @@
             <Left :title='title'/>
             <div class='center-area flex-center'>
                 <div class='hover-self'>
-                    <img :src='imgObj[title].click' alt=''>
+                    <img v-show='currentLv === "first"' :src='imgObj[title].click' alt=''>
+                </div>
+                <div class='back' @click='currentLv = "first"'>
+                    <img v-show='currentLv === "second"' src='../../assets/img/fanhui.png' alt=''>
                 </div>
                 <div class='map-img'>
-                    <img src='../../assets/img/group-6.png' alt='' usemap='#LangFangMap'>
+                    <img v-show='currentLv === "first"' src='../../assets/img/group-6.png' alt='' usemap='#LangFangMap'>
+                    <img v-show='currentLv === "second" && currentImg === "SanHeShi"' src='../../assets/img/big/SanHeShi.png' alt=''>
+                    <img v-show='currentLv === "second" && currentImg === "DaChangHuiZu"' src='../../assets/img/big/DaChangHuiZu.png' alt=''>
+                    <img v-show='currentLv === "second" && currentImg === "XiangHeXian"' src='../../assets/img/big/XiangHeXian.png' alt=''>
+                    <img v-show='currentLv === "second" && currentImg === "GuAnXian"' src='../../assets/img/big/GuAnXian.png' alt=''>
+                    <img v-show='currentLv === "second" && currentImg === "YongQingXian"' src='../../assets/img/big/YongQingXian.png' alt=''>
+                    <img v-show='currentLv === "second" && currentImg === "AnCiQu"' src='../../assets/img/big/AnCiQu.png' alt=''>
+                    <img v-show='currentLv === "second" && currentImg === "BaZhouShi"' src='../../assets/img/big/BaZhouShi.png' alt=''>
+                    <img v-show='currentLv === "second" && currentImg === "WenAnXian"' src='../../assets/img/big/WenAnXian.png' alt=''>
+                    <img v-show='currentLv === "second" && currentImg === "DaChengXian"' src='../../assets/img/big/DaChengXian.png' alt=''>
                 </div>
                 <map name="LangFangMap" id="LangFangMap">
                     <area name='三河市' data-click='SanHeShi' shape="poly" coords="466,74,467,67,474,58,472,49,474,37,491,38,492,31,505,24,509,30,528,26,532,29,534,26,544,30,549,26,553,35,560,32,567,39,577,38,589,25,604,13,625,19,635,14,644,14,655,13,659,17,643,24,646,40,650,57,640,65,641,72,633,75,631,81,632,85,628,92,623,95,632,102,627,107,631,120,640,124,661,133,669,128,674,136,672,143,656,144,652,139,647,140,646,144,635,146,629,143,614,147,613,152,593,153,587,146,589,137,592,129,595,124,594,116,581,112,576,107,565,103,560,94,551,88,550,77,547,69,544,64,532,67,520,65,517,72,523,81,518,90,513,97,509,105,500,108,488,108,484,114,475,110,476,89,468,77,465,74,467,74,464,74,466,67,467,68"/>
@@ -54,6 +66,10 @@
                 containerStyleObj: {},
                 circleStyleObj: {},
                 imgObj: {
+                    none: {
+                        click: '',
+                        status: 'normal'
+                    },
                     SanHeShi: {
                         click: SanHeShi,
                         status: 'normal'
@@ -95,7 +111,9 @@
                         status: 'normal'
                     }
                 },
-                title: 'SanHeShi',
+                currentLv: 'first',
+                currentImg: '',
+                title: 'none',
             });
             const methods = reactive({
                 initScale: () => {
@@ -108,16 +126,23 @@
                         // transformOrigin: 'center center'
                     }
                 },
-                bindClick: () => {
+                bindAreaClick: () => {
                     $('.center-area area').on('click', function () {
                         state.title = $(this).attr('data-click');
                         state.imgObj[$(this).attr('data-click')].status = 'click';
+                    })
+                },
+                bindAreaDblClick: () => {
+                    $('.center-area #LangFangMap area').on('dblclick', function () {
+                        state.currentLv = 'second';
+                        state.currentImg = $(this).attr('data-click');
                     })
                 }
             });
             onMounted(() => {
                 methods.initScale();
-                methods.bindClick();
+                methods.bindAreaClick();
+                methods.bindAreaDblClick();
             });
             return {
                 ...toRefs(state),
@@ -135,6 +160,7 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
+        color: #fff;
         .content-box{
             width: 1720px;
             overflow: hidden;
@@ -151,10 +177,18 @@
                 .hover-self{
                     position: absolute;
                 }
+                .back{
+                    position: absolute;
+                    bottom: -10px;
+                    left: 50%;
+                    cursor: pointer;
+                    z-index: 1;
+                }
                 .map-img{
                     position: absolute;
                     img{
                         width: 100%;
+                        cursor: pointer;
                     }
                 }
             }
