@@ -7,8 +7,13 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         name: 'Dashboard'
     },
     {
+        path: '/test',
+        component: () => import('@/views/test/Index.vue'),
+        name: 'Test'
+    },
+    {
         path: '/',
-        redirect: '/dashboard'
+        redirect: '/test'
     }
 ];
 const router = createRouter({

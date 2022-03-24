@@ -1,36 +1,19 @@
 <template>
-    <div class='dashboard-container'>
+    <div class='dashboard-container flex-center'>
         <div class='content-box'>
             <Left :title='title'/>
             <div class='center-area flex-center'>
-                <div class='circle-box flex-center' :style='circleStyleObj'>
-                    <div class='circle-small flex-center'>
-                        <div class='lang-fang-shi-top-box'>
-                            <img title='三河市' :class='imgObj.SanHeShi.status === "normal" ? "san-he-shi" : "san-he-shi-click"' :src="imgObj.SanHeShi[imgObj.SanHeShi.status]" usemap="#SanHeShiMap" />
-                            <map name="SanHeShiMap" id="SanHeShiMap">
-                                <area name='三河市' data-click='SanHeShi' shape="poly" coords="16,49,26,49,27,44,38,41,41,45,51,41,56,43,63,44,68,44,82,50,101,33,114,37,129,31,136,32,141,38,128,38,133,63,122,81,117,90,122,105,138,112,145,111,149,122,133,121,122,127,110,124,98,131,92,118,96,107,86,100,75,98,73,90,63,85,65,74,50,67,42,73,50,81,43,86,43,93,41,100,27,100,22,104,17,99,18,79,11,75,15,65,15,52"/>
-                            </map>
-                            <img title='大厂回族自治县' :class='imgObj.DaChangHuiZu.status === "normal" ? "da-chang-hui-zu" : "da-chang-hui-zu-click"' :src="imgObj.DaChangHuiZu[imgObj.DaChangHuiZu.status]" usemap="#DaChangHuiZuMap" />
-                            <map name="DaChangHuiZuMap" id="DaChangHuiZuMap">
-                                <area name='大厂回族自治县' data-click='DaChangHuiZu' shape="poly" coords="17,41,18,35,21,34,20,29,26,26,24,17,19,16,21,12,26,13,30,11,38,11,46,28,49,37,60,42,69,47,64,55,64,62,56,62,56,56,46,55,36,53,24,58,14,54,9,47,6,40,14,40" />
-                            </map>
-                            <img title='香河县' :class='imgObj.XiangHeXian.status === "normal" ? "xiang-he-xian" : "xiang-he-xian-click"' :src='imgObj.XiangHeXian[imgObj.XiangHeXian.status]' usemap="#XiangHeXianMap" />
-                            <map name="XiangHeXianMap" id="XiangHeXianMap">
-                                <area name='香河县' data-click='XiangHeXian' shape="poly" coords="17,14,24,10,30,9,33,14,37,11,46,19,57,21,59,27,71,26,81,20,87,22,88,30,94,31,93,37,102,44,94,50,88,50,88,55,86,60,90,59,91,68,89,82,89,87,92,89,92,93,86,93,85,99,76,99,63,92,47,87,40,90,33,92,30,88,29,80,26,74,23,66,17,66,16,72,10,72,7,65,12,58,15,54,13,44,17,40,26,36,17,16" />
-                            </map>
-                        </div>
-                        <div class='lang-fang-shi-area-box flex-center'>
-                            <div class='point'></div>
-                            <img title='固安县' class='gu-an-xian' src='../../assets/img/big/GuAnXian.png' alt=''>
-                            <img title='永清县' class='yong-qing-xian' src='../../assets/img/big/YongQingXian.png' alt=''>
-                            <img title='广阳区' class='guang-yang-qu' src='../../assets/img/big/GuangYangQu.png' alt=''>
-                            <img title='安次区' class='an-ci-qu' src='../../assets/img/big/AnCiQu.png' alt=''>
-                            <img title='霸州市' class='ba-zhou-shi' src='../../assets/img/big/BaZhouShi.png' alt=''>
-                            <img title='文安县' class='wen-an-xian' src='../../assets/img/big/WenAnXian.png' alt=''>
-                            <img title='大城县' class='da-cheng-xian' src='../../assets/img/big/DaChengXian.png' alt=''>
-                        </div>
-                    </div>
+                <div class='hover-self'>
+                    <img :src='imgObj[title].click' alt=''>
                 </div>
+                <div class='map-img'>
+                    <img src='../../assets/img/group-6.png' alt='' usemap='#LangFangMap'>
+                </div>
+                <map name="LangFangMap" id="LangFangMap">
+                    <area name='三河市' data-click='SanHeShi' shape="poly" coords="466,74,467,67,474,58,472,49,474,37,491,38,492,31,505,24,509,30,528,26,532,29,534,26,544,30,549,26,553,35,560,32,567,39,577,38,589,25,604,13,625,19,635,14,644,14,655,13,659,17,643,24,646,40,650,57,640,65,641,72,633,75,631,81,632,85,628,92,623,95,632,102,627,107,631,120,640,124,661,133,669,128,674,136,672,143,656,144,652,139,647,140,646,144,635,146,629,143,614,147,613,152,593,153,587,146,589,137,592,129,595,124,594,116,581,112,576,107,565,103,560,94,551,88,550,77,547,69,544,64,532,67,520,65,517,72,523,81,518,90,513,97,509,105,500,108,488,108,484,114,475,110,476,89,468,77,465,74,467,74,464,74,466,67,467,68"/>
+                    <area name='大厂回族自治县' data-click='DaChangHuiZu' shape="poly" coords="485,115,494,125,499,130,509,135,519,139,526,145,525,138,533,134,548,132,552,138,553,140,567,144,578,144,585,146,590,138,593,126,594,121,587,113,577,111,565,103,558,93,552,85,547,71,541,66,530,68,520,68,522,80,524,89,519,97,516,103,508,107,496,107,488,108,486,114" />
+                    <area name='香河县' shape="poly" data-click='XiangHeXian' coords="535,141,541,157,545,167,549,175,537,175,537,182,529,184,531,198,526,203,519,207,524,221,526,224,533,214,548,214,544,222,548,231,550,238,551,243,556,245,559,250,574,243,591,248,608,253,619,261,630,259,633,252,642,249,634,237,638,221,639,210,631,198,637,192,647,188,653,184,645,170,636,165,635,155,620,156,610,158,597,160,590,155,589,151,576,150,574,143,561,136,542,135,537,139"/>
+                </map>
             </div>
             <Right/>
         </div>
@@ -76,7 +59,7 @@
                         status: 'normal'
                     }
                 },
-                title: '无',
+                title: 'SanHeShi',
             });
             const methods = reactive({
                 initScale: () => {
@@ -85,16 +68,15 @@
                     const circleValue = w / state.o_w < h / state.o_h ? w / state.o_w : h / state.o_h;
                     console.log(circleValue);
                     state.circleStyleObj = {
-                        transform: `scale(${circleValue})`,
-                        transformOrigin: 'center center'
+                        // transform: `scale(${circleValue})`,
+                        // transformOrigin: 'center center'
                     }
                 },
                 bindClick: () => {
-                    $('.lang-fang-shi-top-box area').on('click', function () {
-                        console.log($(this).attr('name'));
-                        state.title = $(this).attr('name');
+                    $('.center-area area').on('click', function () {
+                        state.title = $(this).attr('data-click');
                         Object.keys(state.imgObj).map(item => {
-                            state.imgObj[item].status = 'normal';
+                            state.imgObj[item].staus = 'normal';
                         });
                         state.imgObj[$(this).attr('data-click')].status = 'click';
                     })
@@ -114,128 +96,32 @@
 
 <style scoped lang='less'>
     .dashboard-container{
-        width: 100%;
+        min-width: 1920px;
         height: 100%;
-        background: #031765;
-        color: #fff;
+        background-image: url("../../assets/bg.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
         .content-box{
-            width: 100%;
-            height: 100%;
+            width: 1720px;
+            overflow: hidden;
+            margin-top: 15px;
             display: flex;
             justify-content: space-between;
             .center-area{
-                flex: 1;
-                .circle-box{
-                    width: 600px;
-                    height: 600px;
-                    border-radius: 50%;
-                    border: 1px dashed rgba(255, 255, 255, .3);
-                    .circle-small{
-                        width: 500px;
-                        height: 500px;
-                        border-radius: 50%;
-                        border: 1px dashed rgba(255, 255, 255, .1);
-                        position: relative;
-                        img, area{
-                            cursor: pointer;
-                        }
-                        .lang-fang-shi-top-box{
-                            position: absolute;
-                            top: -50px;
-                            left: 300px;
-                            .san-he-shi{
-                                width: 130px;
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                            }
-                            .san-he-shi-click{
-                                width: 483px;
-                                position: absolute;
-                                top: -178px;
-                                left: -176px;
-                                z-index: -1;
-                            }
-                            .da-chang-hui-zu{
-                                width: 60px;
-                                position: absolute;
-                                top: 47px;
-                                left: 20px;
-                            }
-                            .da-chang-hui-zu-click{
-                                width: 444px;
-                                position: absolute;
-                                top: -147px;
-                                left: -172px;
-                                z-index: -1;
-                            }
-                            .xiang-he-xian{
-                                width: 84px;
-                                position: absolute;
-                                top: 83px;
-                                left: 30px;
-                            }
-                            .xiang-he-xian-click{
-                                width: 444px;
-                                position: absolute;
-                                top: -98px;
-                                left: -150px;
-                                z-index: -1;
-                            }
-                        }
-                        .lang-fang-shi-area-box{
-                            width: 350px;
-                            height: 350px;
-                            position: relative;
-                            .point{
-                                width: 2px;
-                                height: 2px;
-                                border-radius: 50%;
-                                background: #fff;
-                            }
-                            .gu-an-xian{
-                                width: 105px;
-                                position: absolute;
-                                top: 42px;
-                                left: 37px;
-                            }
-                            .yong-qing-xian{
-                                width: 105px;
-                                position: absolute;
-                                top: 46px;
-                                left: 89px;
-                            }
-                            .guang-yang-qu{
-                                width: 103px;
-                                position: absolute;
-                                top: -16px;
-                                left: 101px;
-                            }
-                            .an-ci-qu{
-                                width: 114px;
-                                position: absolute;
-                                top: 30px;
-                                left: 122px;
-                            }
-                            .ba-zhou-shi{
-                                width: 147px;
-                                position: absolute;
-                                top: 78px;
-                                left: 75px;
-                            }
-                            .wen-an-xian{
-                                width: 120px;
-                                position: absolute;
-                                top: 142px;
-                                left: 66px;
-                            }
-                            .da-cheng-xian{
-                                width: 103px;
-                                position: absolute;
-                                top: 205px;
-                                left: 93px;
-                            }
-                        }
+                width: 840px;
+                height: 810px;
+                text-align: center;
+                background: url("../../assets/img/zhms/map.png");
+                background-size: cover;
+                position: relative;
+                .hover-self{
+                    position: absolute;
+                }
+                .map-img{
+                    position: absolute;
+                    img{
+                        width: 100%;
                     }
                 }
             }

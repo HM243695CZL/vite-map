@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { transformRequireDynamic } from './src/plugins';
 import vue from '@vitejs/plugin-vue';
 
 function pathResolve(dir) {
@@ -10,8 +9,7 @@ function pathResolve(dir) {
 export default defineConfig({
     base: './',
     plugins: [
-        vue(),
-        transformRequireDynamic()
+        vue()
     ], // 配置需要使用的插件列表，将vue添加进去
     resolve: { // 配置文件别名
         alias: {

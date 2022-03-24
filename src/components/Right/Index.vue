@@ -13,8 +13,8 @@
 
 <style scoped lang='less'>
     .right-container{
-        width: 400px;
-        height: 100%;
+        width: 435px;
+        height: 800px;
         border-left: 1px dashed #fff;
     }
 </style>
