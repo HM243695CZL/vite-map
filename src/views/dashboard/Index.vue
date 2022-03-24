@@ -1,26 +1,26 @@
 <template>
     <div class='dashboard-container'>
         <div class='content-box'>
-            <Left/>
+            <Left :title='title'/>
             <div class='center-area flex-center'>
                 <div class='circle-box flex-center' :style='circleStyleObj'>
                     <div class='circle-small flex-center'>
                         <div class='lang-fang-shi-top-box'>
-                            <img title='三河市' class='san-he-shi' :src="sanHeShiImg" width="100" height="100" border="0" usemap="#SanHeShiMap" />
+                            <img title='三河市' :class='imgObj.SanHeShi.status === "normal" ? "san-he-shi" : "san-he-shi-click"' :src="imgObj.SanHeShi[imgObj.SanHeShi.status]" usemap="#SanHeShiMap" />
                             <map name="SanHeShiMap" id="SanHeShiMap">
-                                <area class='san-he-shi-area' @click='clickSanHeSHi()' hover='@/assets/img/SanHeShi.png' name='三河市' shape="poly" coords="10,30,15,30,19,26,27,27,37,26,43,28,51,30,60,23,63,20,74,22,79,19,86,21,81,23,82,32,82,40,79,44,74,53,74,62,77,66,82,68,92,69,93,76,82,75,81,78,70,78,60,81,59,66,52,62,44,55,37,45,28,43,26,46,31,50,26,59,14,64,9,57,7,47,7,39,8,32"/>
+                                <area name='三河市' data-click='SanHeShi' shape="poly" coords="16,49,26,49,27,44,38,41,41,45,51,41,56,43,63,44,68,44,82,50,101,33,114,37,129,31,136,32,141,38,128,38,133,63,122,81,117,90,122,105,138,112,145,111,149,122,133,121,122,127,110,124,98,131,92,118,96,107,86,100,75,98,73,90,63,85,65,74,50,67,42,73,50,81,43,86,43,93,41,100,27,100,22,104,17,99,18,79,11,75,15,65,15,52"/>
                             </map>
-                            <img title='大厂回族自治县' class='da-chang-hui-zu' src="../../assets/img/big/DaChangHuiZu.png" width="50" height="50" border="0" usemap="#DaChangHuiZuMap" />
+                            <img title='大厂回族自治县' :class='imgObj.DaChangHuiZu.status === "normal" ? "da-chang-hui-zu" : "da-chang-hui-zu-click"' :src="imgObj.DaChangHuiZu[imgObj.DaChangHuiZu.status]" usemap="#DaChangHuiZuMap" />
                             <map name="DaChangHuiZuMap" id="DaChangHuiZuMap">
-                                <area @click='clickDaChangeHuiZu()' hover='../../assets/img/DaChangHuiZu.png' name='大厂回族自治县' shape="poly" coords="3,27,13,26,14,14,15,6,23,11,30,16,33,21,35,24,40,26,45,24,47,21,46,32,44,42,38,42,33,36,24,35,18,37,13,39,6,29,3,29" />
+                                <area name='大厂回族自治县' data-click='DaChangHuiZu' shape="poly" coords="17,41,18,35,21,34,20,29,26,26,24,17,19,16,21,12,26,13,30,11,38,11,46,28,49,37,60,42,69,47,64,55,64,62,56,62,56,56,46,55,36,53,24,58,14,54,9,47,6,40,14,40" />
                             </map>
-                            <img title='香河县' class='xiang-he-xian' src='../../assets/img/big/XiangHeXian.png' width="60" height="60" border="0" usemap="#XiangHeXianMap" />
+                            <img title='香河县' :class='imgObj.XiangHeXian.status === "normal" ? "xiang-he-xian" : "xiang-he-xian-click"' :src='imgObj.XiangHeXian[imgObj.XiangHeXian.status]' usemap="#XiangHeXianMap" />
                             <map name="XiangHeXianMap" id="XiangHeXianMap">
-                                <area @click='clickXiangHeXian()' hover='../../assets/img/XiangHeXian.png' name='香河县' shape="poly" coords="10,6,16,6,22,6,32,12,44,11,51,19,54,24,50,32,50,42,49,51,43,54,26,48,20,49,13,42,4,39,7,27,11,18,8,9,9,7"/>
+                                <area name='香河县' data-click='XiangHeXian' shape="poly" coords="17,14,24,10,30,9,33,14,37,11,46,19,57,21,59,27,71,26,81,20,87,22,88,30,94,31,93,37,102,44,94,50,88,50,88,55,86,60,90,59,91,68,89,82,89,87,92,89,92,93,86,93,85,99,76,99,63,92,47,87,40,90,33,92,30,88,29,80,26,74,23,66,17,66,16,72,10,72,7,65,12,58,15,54,13,44,17,40,26,36,17,16" />
                             </map>
                         </div>
                         <div class='lang-fang-shi-area-box flex-center'>
-                            <!--<div class='point'></div>-->
+                            <div class='point'></div>
                             <img title='固安县' class='gu-an-xian' src='../../assets/img/big/GuAnXian.png' alt=''>
                             <img title='永清县' class='yong-qing-xian' src='../../assets/img/big/YongQingXian.png' alt=''>
                             <img title='广阳区' class='guang-yang-qu' src='../../assets/img/big/GuangYangQu.png' alt=''>
@@ -39,8 +39,12 @@
 
 <script lang='ts'>
     import { defineComponent, onMounted, toRefs, reactive } from 'vue';
-    import sanHeShiHoverImg from '@/assets/img/SanHeShi.png';
-    import sanHeShiImg from '@/assets/img/big/SanHeShi.png';
+    import SanHeShiImg from '@/assets/img/big/SanHeShi.png';
+    import DaChangHuiZuImg from '@/assets/img/big/DaChangHuiZu.png';
+    import XiangHeXianImg from '@/assets/img/big/XiangHeXian.png';
+    import SanHeShiClickImg from '@/assets/img/SanHeShi.png';
+    import DaChangHuiZuClickImg from '@/assets/img/DaChangHuiZu.png';
+    import XiangHeXianClickImg from '@/assets/img/XiangHeXian.png';
     import $ from 'jquery';
     import Left from '@/components/Left/Index.vue'
     import Right from '@/components/Right/Index.vue'
@@ -55,8 +59,24 @@
                 o_h: 768,
                 containerStyleObj: {},
                 circleStyleObj: {},
-                sanHeShiImg,
-                sanHeShiHoverImg
+                imgObj: {
+                    SanHeShi: {
+                        normal: SanHeShiImg,
+                        click: SanHeShiClickImg,
+                        status: 'normal'
+                    },
+                    DaChangHuiZu: {
+                        normal: DaChangHuiZuImg,
+                        click: DaChangHuiZuClickImg,
+                        status: 'normal'
+                    },
+                    XiangHeXian: {
+                        normal: XiangHeXianImg,
+                        click: XiangHeXianClickImg,
+                        status: 'normal'
+                    }
+                },
+                title: '无',
             });
             const methods = reactive({
                 initScale: () => {
@@ -69,23 +89,20 @@
                         transformOrigin: 'center center'
                     }
                 },
-                clickSanHeSHi: () => {
-                    console.log('clickSanHeSHi');
-                },
-                clickDaChangeHuiZu: () => {
-                    console.log('clickDaChangeHuiZu');
-                },
-                clickXiangHeXian: () => {
-                    console.log('clickXiangHeXian');
+                bindClick: () => {
+                    $('.lang-fang-shi-top-box area').on('click', function () {
+                        console.log($(this).attr('name'));
+                        state.title = $(this).attr('name');
+                        Object.keys(state.imgObj).map(item => {
+                            state.imgObj[item].status = 'normal';
+                        });
+                        state.imgObj[$(this).attr('data-click')].status = 'click';
+                    })
                 }
             });
             onMounted(() => {
                 methods.initScale();
-                $('.san-he-shi-area').hover(function () {
-                    $('.san-he-shi').attr('src', state.sanHeShiHoverImg).attr('class', 'san-he-shi-hover');
-                }, function () {
-                    $('.san-he-shi-hover').attr('src', state.sanHeShiImg).attr('class', 'san-he-shi');
-                })
+                methods.bindClick();
             });
             return {
                 ...toRefs(state),
@@ -127,29 +144,43 @@
                             top: -50px;
                             left: 300px;
                             .san-he-shi{
-                                width: 80px;
+                                width: 130px;
                                 position: absolute;
                                 top: 0;
                                 left: 0;
                             }
-                            .san-he-shi-hover{
-                                width: 280px;
+                            .san-he-shi-click{
+                                width: 483px;
                                 position: absolute;
-                                top: -90px;
-                                left: -102px;
-                                height: 270px;
+                                top: -178px;
+                                left: -176px;
+                                z-index: -1;
                             }
                             .da-chang-hui-zu{
-                                width: 42px;
+                                width: 60px;
                                 position: absolute;
-                                top: 28px;
-                                left: 9px;
+                                top: 47px;
+                                left: 20px;
+                            }
+                            .da-chang-hui-zu-click{
+                                width: 444px;
+                                position: absolute;
+                                top: -147px;
+                                left: -172px;
+                                z-index: -1;
                             }
                             .xiang-he-xian{
-                                width: 56px;
+                                width: 84px;
                                 position: absolute;
-                                top: 52px;
-                                left: 16px;
+                                top: 83px;
+                                left: 30px;
+                            }
+                            .xiang-he-xian-click{
+                                width: 444px;
+                                position: absolute;
+                                top: -98px;
+                                left: -150px;
+                                z-index: -1;
                             }
                         }
                         .lang-fang-shi-area-box{

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "dev-host": "vite --host 192.168.2.197",
     "preview": "vite preview"
   },
   "dependencies": {
