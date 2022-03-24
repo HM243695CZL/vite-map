@@ -13,7 +13,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     },
     {
         path: '/',
-        redirect: '/test'
+        redirect: '/dashboard'
     }
 ];
 const router = createRouter({
